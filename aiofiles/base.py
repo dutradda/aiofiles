@@ -1,7 +1,7 @@
 """Various base classes."""
 import asyncio
 
-from ._compat import PY_35
+from ._compat import PY_35, PY_36
 
 
 class AsyncBase:
@@ -11,10 +11,15 @@ class AsyncBase:
         self._executor = executor
 
     if PY_35:
-        @asyncio.coroutine
-        def __aiter__(self):
-            """We are our own iterator."""
-            return self
+        if PY_36:
+            def __aiter__(self):
+                """We are our own iterator."""
+                return self
+        else:
+            @asyncio.coroutine
+            def __aiter__(self):
+                """We are our own iterator."""
+                return self
 
         @asyncio.coroutine
         def __anext__(self):
