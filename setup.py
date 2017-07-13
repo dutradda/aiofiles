@@ -22,7 +22,7 @@ def find_version(*file_paths):
     raise RuntimeError("Unable to find version string.")
 
 setup(
-    name='aiofiles',
+    name='aiofiles-ext',
     version=find_version('aiofiles', '__init__.py'),
     packages=find_packages(),
     url='https://github.com/Tinche/aiofiles',
